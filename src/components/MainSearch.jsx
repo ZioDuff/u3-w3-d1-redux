@@ -36,17 +36,17 @@ const MainSearch = () => {
           <h1 className="display-1">Remote Jobs Search</h1>
         </Col>
         <Col xs={10} className="mx-auto">
-          <Form onSubmit={handleSubmit}>
+          <Form className="text-center" onSubmit={handleSubmit}>
             <Form.Control
               type="search"
               value={query}
               onChange={handleChange}
               placeholder="type and press Enter"
             />
+            <Link to={"/home/favorites"}>
+              <Form.Text>Go To Fav</Form.Text>
+            </Link>
           </Form>
-          <Link to={"/home/favorites"}>
-            <Form.Text>fav</Form.Text>
-          </Link>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
           {jobs.map((jobData) => (

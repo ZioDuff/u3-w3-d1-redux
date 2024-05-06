@@ -20,7 +20,17 @@ const mainReducers = (state = initialState, action) => {
           content: [...state.favorites.content, action.payload],
         },
       }
+    case "REMOVE_FROM_FAVOURITE":
+      return {
+        ...state,
+        favorites: {
+          ...state.favorites,
 
+          content: state.favorites.content.filter(
+            (_, i) => i !== action.payload
+          ),
+        },
+      }
     default:
       return state
   }
