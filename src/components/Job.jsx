@@ -1,10 +1,11 @@
-import { Row, Col, Button } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { FaRegStar } from "react-icons/fa"
-import { useDispatch } from "react-redux"
+import { FaRegStar, FaStar } from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux"
 
 const Job = ({ data }) => {
   const dispatch = useDispatch()
+  const favorites = useSelector((state) => state.favorites.content)
   return (
     <Row
       className="mx-0 mt-3 p-3"
@@ -19,12 +20,24 @@ const Job = ({ data }) => {
         </a>
       </Col>
       <Col xs={2}>
-        <FaRegStar
-          className="icon"
-          onClick={() => {
-            dispatch({ type: "ADD_TO_FAVORITES", payload: data })
-          }}
-        />
+        {favorites && favorites.includes(data.company_name) ? (
+          <FaStar
+            className="icon"
+            onClick={() => {
+              dispatch({
+                type: "REMOVE_FROM_FAVOURITE",
+                payload: data.company_name,
+              })
+            }}
+          />
+        ) : (
+          <FaRegStar
+            className="icon"
+            onClick={() => {
+              dispatch({ type: "ADD_TO_FAVORITES", payload: data.company_name })
+            }}
+          />
+        )}
       </Col>
     </Row>
   )

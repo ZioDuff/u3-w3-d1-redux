@@ -27,7 +27,7 @@ const mainReducers = (state = initialState, action) => {
           ...state.favorites,
 
           content: state.favorites.content.filter(
-            (_, i) => i !== action.payload
+            (companyName) => companyName !== action.payload
           ),
         },
       }

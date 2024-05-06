@@ -7,7 +7,7 @@ import {
   ListGroupItem,
   Row,
 } from "react-bootstrap"
-import Job from "./Job"
+
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
@@ -21,18 +21,25 @@ const Favorites = () => {
         <Col xs={10} className="mx-auto mb-5">
           <h1>I tuoi preferiti</h1>
           {favorites.length > 0 ? (
-            favorites.map((jobData, i) => (
+            favorites.map((companyName) => (
               <ListGroup>
-                <ListGroupItem key={i}>
-                  <Link to={`/${jobData.company_name}`}>
-                    {jobData.company_name}
+                <ListGroupItem
+                  className="d-flex align-items-center justify-content-between mb-3"
+                  key={companyName}
+                >
+                  <Link className="nav-link" to={`/${companyName}`}>
+                    {companyName}
                   </Link>
                   <Button
+                    className="btn btn-danger"
                     onClick={() => {
-                      dispatch({ type: "REMOVE_FROM_FAVOURITE", payload: i })
+                      dispatch({
+                        type: "REMOVE_FROM_FAVOURITE",
+                        payload: companyName,
+                      })
                     }}
                   >
-                    Delete
+                    🗑️
                   </Button>
                 </ListGroupItem>
               </ListGroup>
